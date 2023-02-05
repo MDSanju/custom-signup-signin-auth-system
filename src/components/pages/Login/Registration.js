@@ -1,43 +1,55 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "../../context/UserContext";
+import ScaleLoader from "react-spinners/ScaleLoader";
+import swal from "sweetalert";
 
 const Registration = () => {
+  const userContext = useContext(UserContext);
+  const { createUser, isLoading } = userContext;
+
+  const handleCreateUser = (e) => {
+    e.preventDefault();
+
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    const confirmpassword = e.target.confirmpassword.value;
+
+    if (password === confirmpassword) {
+      createUser(email, password, confirmpassword);
+    } else {
+      return swal({
+        title: "Attention",
+        text: "Use the same password for both of field to proceed!",
+        icon: "warning",
+        button: "OK!",
+        className: "modal_class_success",
+      });
+    }
+  };
+
   return (
-    <form className="sign-up-form">
+    <form className="sign-up-form" onSubmit={handleCreateUser}>
       <h2 className="signUp_title">Sign up</h2>
-      {/* <div className="input-field">
-        <i className="fas fa-user"></i>
-        <input
-          type="text"
-          placeholder="Username"
-          required
-            {...register("displayName")}
-        />
-      </div> */}
       <div className="input-field">
         <i className="fas fa-envelope"></i>
-        <input
-          type="email"
-          placeholder="Email"
-          required
-          //   {...register("email")}
-        />
+        <input type="email" name="email" placeholder="Email" required />
       </div>
       <div className="input-field">
         <i className="fas fa-lock"></i>
         <input
           type="password"
+          name="password"
           placeholder="New password"
           required
-          //   {...register("password")}
         />
       </div>
       <div className="input-field">
         <i className="fas fa-lock"></i>
         <input
           type="password"
+          name="confirmpassword"
           placeholder="Re-type new password"
           required
-          //   {...register("password2")}
         />
       </div>
       {/* {regError && (
@@ -52,25 +64,24 @@ const Registration = () => {
           draggable
           pauseOnHover
         />
-      )}
+      )} */}
       {isLoading ? (
         <div
           style={{
             display: "flex",
             justifyContent: "center",
-            marginTop: "38px",
           }}
         >
-          <ScaleLoader color={"#003665"} size={85} />
+          <ScaleLoader color={"#003665"} />
         </div>
       ) : (
         <input
           type="submit"
-          onClick={notify}
+          //   onClick={notify}
           className="common_btn"
           value="Sign up"
         />
-      )} */}
+      )}
       <p className="social-text">Or Sign up with social platforms</p>
       <div className="social-media">
         <a href="#" className="social-icon">

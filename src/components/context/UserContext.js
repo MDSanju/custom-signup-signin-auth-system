@@ -6,9 +6,11 @@ export const UserContext = createContext();
 
 export default function UserProvider({ children }) {
   const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   console.log(email, "email gotten!");
 
   const createUser = async (email, password, confirmpassword) => {
+    setIsLoading(true);
     await axios
       .post("https://sysonex-admin-testing.onrender.com/signup", {
         email,
@@ -18,6 +20,15 @@ export default function UserProvider({ children }) {
       .then((res) => {
         if (res.status === 200) {
           setEmail(res.data.email);
+          const wrapper = document.createElement("div");
+          wrapper.innerHTML = `<p>New user created by <span class="text-success fw-bold">${res.data.email}</span> this email!</p> `;
+          swal({
+            // text: `New user created by "${res.data.email}" this email!`,
+            content: wrapper,
+            icon: "success",
+            button: "OK!",
+            className: "modal_class_success",
+          });
         }
       })
       .catch((error) => {
@@ -28,6 +39,9 @@ export default function UserProvider({ children }) {
           button: "OK!",
           className: "modal_class_success",
         });
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -35,6 +49,8 @@ export default function UserProvider({ children }) {
     <UserContext.Provider
       value={{
         createUser,
+        isLoading,
+        setIsLoading,
       }}
     >
       {children}
