@@ -1,9 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Registration from "./Registration";
+import ScaleLoader from "react-spinners/ScaleLoader";
+import { UserContext } from "../../context/UserContext";
+import { useNavigate } from "react-router-dom";
 import "./Login.css";
 
 const Login = () => {
-  const [signUpMode, setSignUpMode] = useState(Boolean);
+  const userContext = useContext(UserContext);
+  const { signIn, isLoading, openOtp, setOpenOtp } = userContext;
+  const [signUpMode, setSignUpMode] = useState("");
+
+  const navigate = useNavigate();
 
   const handleSignInUpPopUp = () => {
     if (signUpMode) {
@@ -12,6 +19,21 @@ const Login = () => {
       setSignUpMode(true);
     }
   };
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+
+    signIn(email, password);
+  };
+
+  if (openOtp) {
+    navigate("/dashboard");
+    setOpenOtp(false);
+  }
+
   return (
     <div className="login_reg_body">
       <div
@@ -21,24 +43,19 @@ const Login = () => {
       >
         <div className="forms-container">
           <div className="signin-signup">
-            <form className="sign-in-form">
+            <form className="sign-in-form" onSubmit={handleLogin}>
               <h2 className="signin_title">Sign in</h2>
               <div className="input-field">
                 <i className="fas fa-envelope"></i>
-                <input
-                  type="email"
-                  placeholder="Email"
-                  required
-                  //   {...register("email")}
-                />
+                <input type="email" name="email" placeholder="Email" required />
               </div>
               <div className="input-field">
                 <i className="fas fa-lock"></i>
                 <input
                   type="password"
+                  name="password"
                   placeholder="Password"
                   required
-                  //   {...register("password")}
                 />
               </div>
               {/* {authError && (
@@ -53,25 +70,24 @@ const Login = () => {
                   draggable
                   pauseOnHover
                 />
-              )}
+              )} */}
               {isLoading ? (
                 <div
                   style={{
                     display: "flex",
                     justifyContent: "center",
-                    marginTop: "38px",
                   }}
                 >
-                  <ScaleLoader color={"#003665"} size={85} />
+                  <ScaleLoader color={"#003665"} />
                 </div>
               ) : (
                 <input
                   type="submit"
-                  onClick={notify}
+                  // onClick={notify}
                   value="Login"
                   className="common_btn solid"
                 />
-              )} */}
+              )}
               <p className="social-text">Or Sign in with social platforms</p>
               <div className="social-media">
                 <a href="#" className="social-icon">

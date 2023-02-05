@@ -13,7 +13,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/details" element={<Details />} />
+        <Route path="/dashboard" element={<Details />} />
         <Route path="*" element={<NoMatch />} />
       </Routes>
     </div>
