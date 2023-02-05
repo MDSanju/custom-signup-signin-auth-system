@@ -309,7 +309,6 @@ input {
 }
 
 input:-internal-autofill-selected {
-    background-color: #f0f0f0 !important;
     border-radius: 55px;
 }
 

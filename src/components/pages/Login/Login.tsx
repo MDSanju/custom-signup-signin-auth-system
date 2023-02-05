@@ -97,8 +97,8 @@ const Login = () => {
             <div className="form_content">
               <h3 style={{ margin: "0" }}>New here ?</h3>
               <p style={{ margin: "0" }}>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Debitis, ex ratione. Aliquid!
+                You don't have any account? Please Sign-Up with a new gmail
+                account and password.
               </p>
               <button
                 className="common_btn transparent mx-1"
@@ -121,8 +121,8 @@ const Login = () => {
             <div className="form_content">
               <h3 style={{ margin: "0" }}>One of us ?</h3>
               <p style={{ margin: "0" }}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-                laboriosam ad deleniti.
+                You already have an account? Please Sign-In with your authorized
+                email and password.
               </p>
               <button
                 className="common_btn transparent mx-1"

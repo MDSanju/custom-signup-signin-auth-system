@@ -4,15 +4,15 @@ const Registration = () => {
   return (
     <form className="sign-up-form">
       <h2 className="signUp_title">Sign up</h2>
-      <div className="input-field">
+      {/* <div className="input-field">
         <i className="fas fa-user"></i>
         <input
           type="text"
           placeholder="Username"
           required
-          //   {...register("displayName")}
+            {...register("displayName")}
         />
-      </div>
+      </div> */}
       <div className="input-field">
         <i className="fas fa-envelope"></i>
         <input
