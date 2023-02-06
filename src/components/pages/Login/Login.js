@@ -3,11 +3,14 @@ import Registration from "./Registration";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import { UserContext } from "../../context/UserContext";
 import { useNavigate } from "react-router-dom";
+import Otp from "./Otp";
 import "./Login.css";
 
 const Login = () => {
   const userContext = useContext(UserContext);
-  const { signIn, isLoading, openOtp, setOpenOtp } = userContext;
+  const { signIn, isLoading, openOtp, setOpenOtp, authentication } =
+    userContext;
+
   const [signUpMode, setSignUpMode] = useState("");
 
   const navigate = useNavigate();
@@ -29,13 +32,17 @@ const Login = () => {
     signIn(email, password);
   };
 
-  if (openOtp) {
+  const t = localStorage.getItem("tokenSigninSignupAuth");
+  const handleJwtAuth = () => {
+    if (t) {
+      authentication(t);
+    }
     navigate("/dashboard");
-    setOpenOtp(false);
-  }
+  };
 
   return (
     <div className="login_reg_body">
+      <Otp smShow={openOtp} setSmShow={setOpenOtp} />
       <div
         className={
           !signUpMode ? "main_container" : "sign-up-mode main_container"
@@ -81,12 +88,25 @@ const Login = () => {
                   <ScaleLoader color={"#003665"} />
                 </div>
               ) : (
-                <input
-                  type="submit"
-                  // onClick={notify}
-                  value="Login"
-                  className="common_btn solid"
-                />
+                <>
+                  {t ? (
+                    <button
+                      type="button"
+                      onClick={handleJwtAuth}
+                      style={{ width: "196px" }}
+                      className="common_btn solid"
+                    >
+                      Authentication
+                    </button>
+                  ) : (
+                    <input
+                      type="submit"
+                      // onClick={notify}
+                      value="Login"
+                      className="common_btn solid"
+                    />
+                  )}
+                </>
               )}
               <p className="social-text">Or Sign in with social platforms</p>
               <div className="social-media">
@@ -125,7 +145,7 @@ const Login = () => {
               </button>
               <button
                 className="common_btn transparent mx-1"
-                // onClick={handleGoBackHome}
+                onClick={() => navigate("/")}
                 id="sign-up-btn"
               >
                 Home
@@ -149,7 +169,7 @@ const Login = () => {
               </button>
               <button
                 className="common_btn transparent mx-1"
-                // onClick={handleGoBackHome}
+                onClick={() => navigate("/")}
                 id="sign-up-btn"
               >
                 Home
