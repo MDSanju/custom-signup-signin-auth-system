@@ -1,0 +1,88 @@
+:root {
+    --shadoww-collor: #6052db;
+    --btnn-collor: #ff5d5d;
+}
+
+.f-404-page-not-found-page {
+    font-size: 14px;
+    min-height: 100vh;
+    width: 100%;
+    background: #040007;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.f-404-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.f-404-code {
+    font-size: 20rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #050108;
+    text-shadow: -1px -1px 0px var(--shadoww-collor), 1px 1px 0px var(--btnn-collor);
+}
+
+.f-404-call-to-action {
+    border: 2px solid var(--btnn-collor);
+    outline: none;
+    background: transparent;
+    color: var(--btnn-collor);
+    padding: 12px 32px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.f-404-call-to-action:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.f-404-info {
+    font-size: 4.5rem;
+    text-transform: uppercase;
+    text-shadow: 2px 3px 0px var(--shadoww-collor);
+    letter-spacing: 8px;
+    transform: translateY(-180px);
+}
+
+
+/* responsive  */
+
+@media screen and (max-width: 720px) {
+    .f-404-code {
+        font-size: 12rem;
+    }
+    .f-404-info {
+        font-size: 2rem;
+        margin-top: 56px;
+    }
+}
+
+@media screen and (max-width: 440px) {
+    .handleImg {
+        width: auto !important;
+        height: auto !important;
+    }
+    .handleHeigth {
+        height: 500px !important;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .f-404-code {
+        font-size: 7rem;
+    }
+    .f-404-info {
+        font-size: 1.5rem;
+        margin-top: 82px;
+    }
+}
